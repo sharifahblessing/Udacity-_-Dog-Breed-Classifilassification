@@ -69,5 +69,51 @@ def calculates_results_stats(results_dic):
                      on how to calculate the counts and statistics.
     """        
     # Replace None with the results_stats_dic dictionary that you created with 
-    # this function 
-    return None
+    # this function
+    results_stats_dic = {}
+    num_of_images = len(results_dic)
+    num_dog_match = 0
+    num_notdog_match = 0
+    num_breed_match = 0
+    num_dog_images = 0
+    num_notdog_images = 0
+
+    for keys, values in results_dic.items():
+        if all(value == 1 for value in values[3:5]):
+            num_dog_match += 1
+
+        elif all(value == 0 for value in values[3:5]):
+            num_notdog_match += 1
+
+    for keys, values in results_dic .items():
+        if values[3] == 1:
+            num_dog_images += 1
+        else:
+            num_notdog_images += 0
+
+    for keys, values in results_dic.items():
+        if all(value == 1 for value in values[2:4]):
+            num_breed_match += 1
+
+    num_label_match = 0
+    for keys, values in results_dic.items():
+        if values[2] == 1:
+            num_label_match += 1
+
+    percent_dog_image = 100*num_dog_match / num_dog_images
+
+    if num_notdog_images > 0:
+        percent_notdog_image = 100*num_notdog_match / num_notdog_images
+    else:
+        print("0")
+
+    percent_dog_breed = 100*num_breed_match / num_dog_images
+
+    percent_label_match = 100*num_label_match / num_of_images
+
+    key = ("n_correct_dogs", "percent_correct_dogs", "n_correct_breed", "percent_correct_breed")
+    value = (num_dog_match, percent_dog_image, num_breed_match, percent_dog_breed)
+    results_stats_dic = {k: v for k, v in zip(key, value)}
+
+    print(results_stats_dic)
+    return results_stats_dic
