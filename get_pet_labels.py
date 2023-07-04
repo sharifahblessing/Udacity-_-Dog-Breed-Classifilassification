@@ -42,4 +42,33 @@ def get_pet_labels(image_dir):
     """
     # Replace None with the results_dic dictionary that you created with this
     # function
+    pet_label_list  = listdir(image_dir)
+
+    for filename_index in range(0, len(pet_label_list)):
+        pet_label_list[filename_index] = pet_label_list[filename_index].lower()
+
+    pet_name_list = []
+    for filename in pet_label_list:
+        split = filename.split("_")
+        pet_name = " "
+        for name in split:
+            if name.isalpha():
+                pet_name += name + " "
+        print(pet_name)
+        pet_name_list.append(pet_name.strip())
+
+    results_dic = {}
+    filename_list = listdir(image_dir)
+    number_in_dict = len(results_dic)
+
+    for key in range(0, len(filename_list)):
+        if filename_list[key] not in results_dic:
+            label_list = []
+            label_list.append(pet_label_list[key])
+            results_dic[filename_list[key]] = label_list
+        else:
+            print("Warning: key = ", filename_list[key], "already exists in results_dic with value = ", results_dic[filename_list[key]])
+
+    for key in results_dic:
+        print("Filename = ", key, "Pet Label = ", results_dic[key])
     return None

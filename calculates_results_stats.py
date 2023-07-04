@@ -111,8 +111,10 @@ def calculates_results_stats(results_dic):
 
     percent_label_match = 100*num_label_match / num_of_images
 
-    key = ("n_correct_dogs", "percent_correct_dogs", "n_correct_breed", "percent_correct_breed")
-    value = (num_dog_match, percent_dog_image, num_breed_match, percent_dog_breed)
+    key = ("n_correct_dogs", "percent_correct_dogs", "n_correct_breed", "percent_correct_breed",
+           "percent_notdog_image", "percent_notdog_image",  " num_dog_images", "num_notdog_images", " num_of_images")
+    value = (num_dog_match, percent_dog_image, num_breed_match, percent_dog_breed,
+             percent_notdog_image, percent_notdog_image,  num_dog_images, num_notdog_images, num_of_images)
     results_stats_dic = {k: v for k, v in zip(key, value)}
 
     print(results_stats_dic)

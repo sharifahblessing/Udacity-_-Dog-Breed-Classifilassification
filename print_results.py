@@ -61,6 +61,27 @@ def print_results(results_dic, results_stats_dic, model,
                               False doesn't print anything(default) (bool) 
     Returns:
            None - simply printing results.
-    """    
+    """
+
+    print("Number of not dog images is {}".format(results_stats_dic['n_notdogs_img']))
+    print("Percentage of correctly classified not dogs is {}".format(results_stats_dic['percent_correct_dogs']))
+
+    for key in results_stats_dic:
+        if key.startswith("p"):
+            print("Percentages include: {},{}".format(key, results_stats_dic[key]))
+
+    if (results_stats_dic['num_notdog_images'] + results_stats_dic['num_dog_images'] !=
+            results_stats_dic['num_of_images']):
+        for key, labels in results_dic.items():
+            if labels[3] == 1 and labels[4] == 0:
+                print(labels[0], labels[1])
+
+    if results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed']:
+        print("Incorrectly classified dog breeds:")
+
+        for key, labels in results_dic.items():
+            if sum(labels[3:]) == 2 and labels[2] == 0:
+                print("Real identity:{} and classifier labels:{}".format(labels[0], labels[1]))
+
     None
                 
